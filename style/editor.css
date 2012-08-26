@@ -44,6 +44,15 @@ object {
 a {
   text-decoration: none;
   border-bottom: 1px dashed;
+  color: #000
+}
+
+a:hover {
+  color: #000
+}
+
+a:active {
+  color: #000
 }
 
 h1,
@@ -72,6 +81,8 @@ img {
   height: 100%;
   min-height: 100%;
   width: 50%;
+  background: #f8f8f8;
+  border-right: solid 1px #d2d2d2;
 }
 
 #editorPadding {
@@ -84,13 +95,21 @@ img {
   margin-top: 4px;
   margin-bottom: 8px;
   padding: 0;
-  border: none;
   line-height: 150%;
   outline: 0;
   font-size: small;
   resize: none;
   max-width: 100%;
+  font-family: "Andale Mono", Lucida Console, Courier , monospace;
+  background: #f8f8f8;
+  border: 0;
+  color: #7e7e7e
 }
+
+#editorPanel.alone textarea {
+  color: #4b4b4b
+}
+
 /* preview and smart scroller*/
 #previewPanel {
   display: inline-block;
@@ -111,16 +130,21 @@ img {
   right: 0;
   position: fixed;
   border-bottom-left-radius: 5px;
+  background: #f8f8f8;
+  border: solid 1px #d2d2d2;
+  border-top: 0;
+  border-right: 0
 }
 
 #menu a {
-  padding: 1px 12px 0px 12px;
+  padding: 1px 12px 0 12px;
   line-height: 200%;
   font-size: 16px;
   font-family: Helvetica;
   text-decoration: none;
   font-weight: bold;
   border: none;
+  color: #7e7e7e;
 }
 
 #menu a:hover {
