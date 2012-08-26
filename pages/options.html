@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>TextDown Preferences</title>
+        <script src="../javascript/app/defaultLocalStorage.js"
+        type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="../style/help_and_options.css">
+        <script>
+            window.onload = function () {
+
+                document.getElementById("htmlTemplate").value = localStorage.getItem("htmlTemplate");
+
+                if (localStorage.getItem("markdownExtension") == ".md") {
+                    document.getElementById("markdownExtension").selectedIndex = 0;
+                } else if (localStorage.getItem("markdownExtension") == ".text") {
+                    document.getElementById("markdownExtension").selectedIndex = 1;
+                } else {
+                    document.getElementById("markdownExtension").selectedIndex = 2;
+                }
+
+                if (localStorage.getItem("zen") == 1) {
+                    document.getElementById("zen").checked = true
+                }
+
+            }
+
+            function save() {
+
+                localStorage.setItem("htmlTemplate", document.getElementById("htmlTemplate").value);
+
+                if (document.getElementById("markdownExtension").selectedIndex == 0) {
+                    localStorage.setItem("markdownExtension", ".md");
+                } else if (document.getElementById("markdownExtension").selectedIndex == 1) {
+                    localStorage.setItem("markdownExtension", ".text");
+                } else {
+                    localStorage.setItem("markdownExtension", ".markdown");
+                }
+
+                alert("Saved!");
+            }
+
+            function reset() {
+                localStorage.clear();
+                window.location = window.location;
+            }
+        </script>
+    </head>
+    
+    <body>
+        <base target='_new' />
+        <!-- Open link in a new tab -->
+        <div id="content">
+            <header>
+                <h1>TextDown Options</h1>
+                <button onclick="reset();">Reset</button>
+                <button onclick="save();">Save</button>
+            </header>
+            <a target="_self" style="text-decoration: underline; position: fixed; right: 15px; bottom: 15px; outline: medium none; border: 0px none;"
+            href="#" onclick="document.body.scrollTop = 0;">top</a>
+            <h2>Export</h2>
+            <h3>Markdown Extension</h3>
+            <p>Export Markdown with extension:
+                <select id="markdownExtension">
+                    <option>.md</option>
+                    <option>.text</option>
+                    <option>.markdown</option>
+                </select>
+            </p>
+            <h3>HTML Template</h3>
+            <p>This will be the template of the exported html file. See
+                <a href="https://gist.github.com/abfbadc3ab24fe92e5dc">this gist</a>for more info.</p>
+            <textarea id="htmlTemplate"></textarea>
+        </div>
+    </body>
+
+</html>

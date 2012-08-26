@@ -1,0 +1,66 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="João Colombo">
+    <title>MarkdownEditor.js</title>
+    <script src="MarkdownEditor.js" type="text/javascript"></script>
+    <script src="../third/showdown.js" type="text/javascript"></script>
+    <script src="../third/keymaster.js" type="text/javascript"></script>
+</head>
+<body>
+    <style>
+        body{font-family:"Myriad Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size:16px;line-height:1.5;width:80%;margin:10px auto;background:#fff;color:#333}blockquote{border-left:solid 4px#b3b3b3;margin:10px 0 10px 32px;padding-left:16px}pre{border:solid 1px#b3b3b3;overflow:auto;padding:10px 10px 10px 10px;width:90%}a{color:#2378f9}mark{background:#eee}code{line-height:1.5}textarea{margin-top:5px;height:100px;width:100%;font-family:'Arial';font-size:small;resize:vertical}
+    </style>
+    <script>
+        window.onload = function () {
+
+            //use the MarkdownEditor
+            MarkdownEditor = new MarkdownEditor();
+            MarkdownEditor.textarea = document.getElementsByTagName('textarea')[0]; 
+            MarkdownEditor.preview = document.getElementById('preview'); 
+            MarkdownEditor.isLivePreview = 1;
+            MarkdownEditor.textarea.onKeyUp = function (event) { //add custom keyup
+                //console.log(event.keyCode);
+            }
+            MarkdownEditor.textarea.onKeyDown = function (event) { //add custom keydown
+                //console.log(event.keyCode);
+            }
+            MarkdownEditor.textarea.onkeypress = function (event) { //markdowneditor.js does not use keypress so you can use it how you want to
+                //console.log(event.keyCode);
+            }
+            MarkdownEditor.extraSyntax = function (text) { //support some simple extra syntax
+                /* NOTE: the extra syntax is executed before showdown */
+                text = text.replace(/(~~)(?=\S)([^\r]*?\S*)\1/g, "<del>$2</del>"); //~~example~~ --> <del>example</del>
+                text = text.replace(/(˜)(?=\S)([^\r]*?\S*)\1/g, "<span style=\'text-decoration:overline\'>$2</span>");
+                text = text.replace(/(~)(?=\S)([^\r]*?\S)\1/g, "<u>$2</u>");
+                text = text.replace(/(\|)(?=\S)([^\r]*?\S*)\1/g, "<mark>$2</mark>");
+                return text;
+            }
+            MarkdownEditor.run(); //make everything work
+
+            //some toolbar buttons
+            document.getElementById('bold').onclick = function () {
+                MarkdownEditor.wrapTextWithString("**"); 
+            }
+            document.getElementById('italic').onclick = function () {
+                MarkdownEditor.wrapTextWithString("*");
+            }
+            document.getElementById('link').onclick = function () {
+                MarkdownEditor.addLink();
+            }
+            document.getElementById('image').onclick = function () {
+                MarkdownEditor.addImage();
+            }
+
+        }
+    </script>
+    </br><b>MarkdownEditor.js</b> by <b><a style="color: #333" href="http://joaocolombo.com">João Colombo</a></b> -
+    <button id="bold">Bold</button>
+    <button id="italic">Italic</button>
+    <button id="link">Add Link</button>
+    <button id="image">Add Image</button>
+    </br>
+    <textarea>MarkdownEditor.js is an simple javascript tool(cross-browser) to make write markdown on websites easy and fast. It's allows you to use a live-preview, if you want to, make text bold or italic or smartly insert links and images, also when writing someting on it is auto complete some characters(like "(" and "["), and smart continues list, block-quotes or code blocks.</textarea>
+    <div id="preview"></div>
+</body>
+</html>

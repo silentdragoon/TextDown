@@ -1,0 +1,88 @@
+/* textdown colors and font */
+
+* {
+	-webkit-font-smoothing: antialiased;
+}
+
+body {
+	font-family: "Segoe UI", Lucida Grande, Arial, sans-serif;
+	font-weight: 300;
+	line-height: 24px;
+	background: #fff;
+	line-height: 150%;
+    color: #282828;
+	text-shadow: none
+}
+
+h1, h2, h3, h4, h5, h6 {
+	letter-spacing: 1px;
+	font-family: "Segoe UI", Ubuntu, Arial, sans-serif;
+}
+
+blockquote {
+	border-left: solid 4px #b3b3b3;
+	margin: 10px 0 10px 32px;
+	padding-left: 16px
+}
+
+pre {
+	border: solid 1px #b3b3b3;
+	overflow: auto;
+	padding: 10px 10px 10px 10px;
+	width: 90%
+}
+
+code {
+	font-family: "Andale Mono", Lucida Console, Courier , monospace;
+}
+
+hr {
+	background: #888
+}
+
+code {
+	line-height: 1.5
+}
+
+#editorPanel {
+	background: #f8f8f8;
+	border-right: solid 1px #d2d2d2;
+}
+
+#editorPanel textarea {
+	font-family: "Andale Mono", Lucida Console, Courier , monospace;
+	background: #f8f8f8;
+	border: 0;
+	color: #7e7e7e
+}
+
+#editorPanel.alone textarea {
+	color: #4b4b4b
+}
+
+html:-webkit-full-screen {
+	background: #fff
+}
+
+#menu {
+	background: #f8f8f8;
+	border: solid 1px #d2d2d2;
+	border-top: 0;
+	border-right: 0
+}
+
+#menu a {
+	color: #7e7e7e;
+}
+
+a {
+	color: #000
+}
+
+a:hover {
+	color: #000
+}
+
+a:active {
+	color: #000
+}
