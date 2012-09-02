@@ -2,7 +2,7 @@
 	"manifest_version": 1,
     "name": "TextDown",
     "description": "An Awesome Markdown Editor",
-    "version": "0.5",
+    "version": "0.5.5",
     "icons": {
         "16": "icons/icon_16.png",
         "48": "icons/icon_48.png",
@@ -19,6 +19,20 @@
         "matches": ["https://*/*.md*", "http://*/*.md*", "file://*/*.md", "https://*/*.markdown*", "http://*/*.markdown*", "file://*/*.markdown", "https://*/*.text", "http://*/*.text", "file://*/*.text"],
         "js": ["javascript/app/open.js"]
     }],
+    "web_accessible_resources": [
+        "javascript/app/app.js",
+        "javascript/app/background.js",
+        "javascript/app/defaultLocalStorage.js",
+        "javascript/app/open.js",
+        "javascript/markdowneditor/MarkdownEditor.js",
+        "javascript/third/beautify-html.js",
+        "javascript/third/FileSaver.js",
+        "javascript/third/keymaster.js",
+        "javascript/third/showdown.js",
+        "style/editor.css",
+        "style/editor_theme_1.css",
+        "style/help_and_options.css"
+    ],
     "content_security_policy": "'unsafe-eval'",
     "permissions": ["tabs", "contextMenus", "unlimitedStorage"]
 }

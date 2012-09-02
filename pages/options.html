@@ -19,8 +19,8 @@
                     document.getElementById("markdownExtension").selectedIndex = 2;
                 }
 
-                if (localStorage.getItem("zen") == 1) {
-                    document.getElementById("zen").checked = true
+                if (localStorage.getItem("githubPreview") == 1) {
+                    document.getElementById("githubPreview").checked = true
                 }
 
             }
@@ -37,7 +37,14 @@
                     localStorage.setItem("markdownExtension", ".markdown");
                 }
 
+                if (document.getElementById("githubPreview").checked) {
+                    localStorage.setItem("githubPreview", 1);
+                } else {
+                    localStorage.setItem("githubPreview", 0);
+                }
+
                 alert("Saved!");
+                window.close();
             }
 
             function reset() {
@@ -56,6 +63,8 @@
                 <button onclick="reset();">Reset</button>
                 <button onclick="save();">Save</button>
             </header>
+            <h2>Preview</h2>
+            <input id="githubPreview" type="checkbox" /> Github Preview
             <a target="_self" style="text-decoration: underline; position: fixed; right: 15px; bottom: 15px; outline: medium none; border: 0px none;"
             href="#" onclick="document.body.scrollTop = 0;">top</a>
             <h2>Export</h2>
@@ -69,7 +78,7 @@
             </p>
             <h3>HTML Template</h3>
             <p>This will be the template of the exported html file. See
-                <a href="https://gist.github.com/abfbadc3ab24fe92e5dc">this gist</a>for more info.</p>
+                <a href="https://gist.github.com/abfbadc3ab24fe92e5dc">this gist</a> for more info.</p>
             <textarea id="htmlTemplate"></textarea>
         </div>
     </body>

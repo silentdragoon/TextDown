@@ -7,4 +7,4 @@ TextDown is made using Javascript and it uses some of these libraries:
 
 ## MarkdownEditor.js
 
-Is a tool I made for TextDown that allows you to transform a simple textarea into a smart markdown editor.
+Is a tool I made for TextDown that allows you to transform a simple textarea into a smart markdown editor(not cross-browser yet).

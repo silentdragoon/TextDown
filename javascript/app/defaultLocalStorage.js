@@ -8,6 +8,9 @@ if (localStorage.getItem("zen") == undefined) {
 if (localStorage.getItem("zenWidth") == undefined) {
 	localStorage.setItem("zenWidth", 70);
 }
+if (localStorage.getItem("githubPreview") == undefined) { 
+    localStorage.setItem("githubPreview", 0);
+}
 if (localStorage.getItem("htmlTemplate") == undefined) {
     localStorage.setItem("htmlTemplate", "<!doctype html>\n<head>\n\t<meta charset='utf - 8'>\n\t<title>{TITLE}</title>\n</head>\n<body>\n\t{HTML_OUTPUT}\n</body>\n</html>");
 }

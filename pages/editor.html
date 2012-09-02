@@ -5,13 +5,14 @@
 	<title>TextDown</title>
 	<link rel="stylesheet" type="text/css" href="../style/editor.css">
 	<link rel="stylesheet" type="text/css" href="../style/editor_theme_1.css">
-	<script src="../Javascript/app/app.js" type="text/javascript"></script>
-	<script src="../Javascript/app/defaultLocalStorage.js" type="text/javascript"></script>
-	<script src="../javascript/markdowneditor/markdowneditor.js" type="text/javascript"></script>
-	<script src="../Javascript/third/keymaster.js" type="text/javascript"></script>
-	<script src="../Javascript/third/showdown.js" type="text/javascript"></script>
-	<script src="../Javascript/third/beautify-html.js" type="text/javascript"></script>
-	<script src="../Javascript/third/FileSaver.js" type="text/javascript"></script>
+	<link id="previewTheme" rel="stylesheet" type="text/css">
+	<script src="../javascript/app/app.js" type="text/javascript"></script>
+	<script src="../javascript/app/defaultLocalStorage.js" type="text/javascript"></script>
+	<script src="../javascript/markdowneditor/MarkdownEditor2.js" type="text/javascript"></script>
+	<script src="../javascript/third/keymaster.js" type="text/javascript"></script>
+	<script src="../javascript/third/showdown.js" type="text/javascript"></script>
+	<script src="../javascript/third/beautify-html.js" type="text/javascript"></script>
+	<script src="../javascript/third/FileSaver.js" type="text/javascript"></script>
 </head>
 <body>
 	<base target='_new' /> <!-- Open link in a new tab -->
@@ -19,96 +20,111 @@
 		<div id="smartScroller"></div>
 		<div id="previewPanel"><div id="preview"></div></div> <!-- Preview Panel -->
 		<div id="menu"><a id="help">?</a></div> <!-- Help Menu -->
-		<div id="editorPanel"><textarea contenteditable="true" spellcheck="true" class="keymaster" placeholder="Keep Calm And TextDown">### Useful Links:
+		<div id="editorPanel"><textarea contenteditable="true" spellcheck="true" class="keymaster" placeholder="Keep Calm And TextDown">### What is new:
+
++ Function to load the last edited document: **Ctrl + Alt + R**.
++ Github Preview to write Github readme files: Go options and check "Github Preview".
+****
+
+![](http://joaocolombo.com/textdown/icon_128.png)
+### Useful Links:
 
 + [My Website](http://joaocolombo.com).
 + [Follow me on Twitter](http://twitter.com/_joaocolombo).  
 + [Fork this on Github](http://github.com/joaocolombo/textdown).   
-+ [DONATE 5 dollars(USD) via Paypal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6ELUC5GYVRB4).  
-+ [Tweet about TextDown](http://clicktotweet.com/4fb98).
++ [Help me buy a Coke](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A6ELUC5GYVRB4).  
++ [Tweet about TextDown](https://twitter.com/intent/tweet?text=Awesome+Markdown+Editor%3A+http%3A%2F%2Fbit.ly%2Ftextdown).
 
 ### Feedbacks and Bugs
 
-Help me make TextDown better, send feedbacks and bugs to **=joaocolombo@outlook.com=**.
+If you'd like to help me make TextDown better, send feedbacks and bugs to **=joaocolombo@outlook.com=**.
 
 ****
-
-# TextDown BETA 0.5.2
-
-**Note:** My english sucks.
 
 ## Keyboard Shortcuts
 
 ### Interface
 
-+ Resize Panels: **Ctrl + Shift + 1**.
-+ Zen Mode: **Ctrl + Shift + 2**.
-+ Resize Editor Width on Zen Mode: **Ctrl + Shift + 3**.
-+ Show time: **Ctrl + Shift + X**.
-+ Show time spend writing: **Ctrl + Alt + X**.
-+ Go to the top of the page: **Ctrl + Shift + 9**.
-+ Alone window editor: **Ctrl + Shift + Y**.
++ Resize Panels: **Ctrl + Shift + 1**
++ Zen Mode: **Ctrl + Shift + 2**
++ Change Editor Width in Zen Mode: **Ctrl + Shift + 3**
++ Show current time: **Ctrl + Shift + X**
++ Show time spent writing: **Ctrl + Alt + X**
++ Go to the top of the page: **Ctrl + Shift + 9**
++ Stand-alone editor in new window: **Ctrl + Shift + Y**
 
 ### Markdown Actions
 
-+ Export HTML: **Ctrl + Alt + S**.
-+ Save Markdown: **Ctrl + Shift + S**.
-+ Print: **Ctrl + Shift + P**.(uncheck: "Headers and Footers").
-+ Bold: **Ctrl/Cmd + B**.
-+ Italic: **Ctrl + I**.
-+ Add link: **Ctrl + Shift + L**.
-+ Add image: **Ctrl + Shift + K**.
-+ Copy HTML: **Ctrl + Alt + C**.
-+ Copy RTF: **Ctrl + Alt + V**.
++ Export HTML: **Ctrl + Alt + S**
++ Save Markdown: **Ctrl + Shift + S**
++ Print: **Ctrl + Shift + P** (uncheck *Headers and Footers* to print just your document)
++ Bold: **Ctrl + B or Cmd + B**
++ Italic: **Ctrl + I**
++ Add link: **Ctrl + Shift + L**
++ Add image: **Ctrl + Shift + K**
++ Copy HTML: **Ctrl/Cmd + Alt + C**
++ Copy RTF: **Ctrl/Cmd + Alt + V**
 
 ### Text Actions
 
-+ Count Words: **Ctrl + Shift + Z**.
-+ Count Characters: **Ctrl + Alt + Z**.
-+ Uppercase: **Ctrl + Shift + U**.
-+ Lowercase: **Ctrl + Shift + I**.
-+ Capitalize: **Ctrl + Shift + O**.
-+ Hard Line Break: **Ctrl + Return**.
-+ Double Line Break: **Shift + Return**.
-+ Insert "...": **Ctrl + ;**.
-+ Delete all the text: **Ctrl/Cmd + Shift + Backspace**.
++ Count Words: **Ctrl + Shift + Z**
++ Count Characters: **Ctrl + Alt + Z**
++ Uppercase: **Ctrl + Shift + U**
++ Lowercase: **Ctrl + Shift + I**
++ Capitalize: **Ctrl + Shift + O**
++ Hard Line Break: **Ctrl + Return**
++ Double Line Break: **Shift + Return**
++ Insert "...": **Ctrl + ;**
++ Insert ". ": **Ctrl + .**
++ Insert ", ": **Ctrl + ,**
++ Delete all text: **Ctrl/Cmd + Shift + Backspace**
++ Change document's name: **Ctrl + J**
++ Load last document: **Ctrl + Alt + R**
 
 ## Some other Features
 
 ### Open Source
 
-TextDown source code is available on Github.
+TextDown source code is [available on Github](http://github.com/joaocolombo/textdown).
+
+### Smart live Preview
+
+The live preview of TextDown follows what you're typing, so you'll never get lost.
 
 ### Build-in Calculator
 
-Type ```{``` the an equation then press **Ctrl + Shift + M** to solve it.
+Type ```{``` followed by an equation, then press **Ctrl + Shift + M** to solve it.
 
 #### Equation format
 
-You can use functions from the javascript math library:
+You can use functions from the javascript math library, even complex equations such as:
 
     (2 + 2.4) x Math.sqrt(25)
 
 ###Chrome Integration
 
-TextDown uses and abuse of Chrome APIs. These are some cool things you can do:
+TextDown uses and abuses the Chrome APIs. These are some cool things you can do thanks to that:
 
-+ Offline use.
-+ Open any local file, just drag the file to Chrome(go to extension page and check "Allow access to file URLs").
-+ Open any web file(go to extension page and check "Allow access to file URLs").
++ Work offline.
++ Open any local file. Just drag the file to Chrome, and it'll open for you to edit in TextDown. You'll first need to let TextDown access local files, though, so go to extension page and check "Allow access to file URLs" under TextDown if you'd like to use this.
++ Open any web file. Again, you'll need to enable this from the extension page. Just check "Allow access to file URLs" there.
 + Copy a link/image as Markdown from the right-click menu.
 
 ###Creating List
 
 When creating list you can use ```tab``` to create a subitem.
 
+### Github Preview
+
+If you are a developer and wants to write a readme file on TextDown, you can use the Github preview. Go to the extensions page on Chrome, then go to the options of TextDown, and check "Github Preview".
+
 ###Change Markdown File Extension
 
-You can change the default Markdown file extension. Go to the extensions page on Chrome then go to the options of TextDown.
+You can change the default Markdown file extension. Go to the extensions page on Chrome, then open TextDown's options and set the extension you want.
 
 ###Change HTML Template
 
-While exporting Markdown as a HTML file TextDown allows you to use a pre defined HTML Template. Go to the extensions page on Chrome then go to the options of TextDown and setup your template.</textarea></div><!-- Editor Panel -->
+While exporting Markdown as a HTML file, TextDown allows you to use a predefined HTML Template. Go to the extensions page on Chrome, then go to the options of TextDown and setup your template.</textarea></div><!-- Editor Panel -->
 	</div>
 </body>
 </html>

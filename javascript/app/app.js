@@ -6,6 +6,10 @@ window.onload = function() {
     var preview = document.getElementById("preview");
     var smartScroller = document.getElementById("smartScroller");
 	
+    if (localStorage.getItem("githubPreview") == 1) {
+        document.getElementById("previewTheme").href = "../style/preview_theme_github.css";
+    }
+
     var MDEditor = new MarkdownEditor();
     MDEditor.textarea = textarea;
     MDEditor.preview = preview;
@@ -19,10 +23,10 @@ window.onload = function() {
 
         adjustEditorPanelHeight();
     }
-    MDEditor.textarea.onKeyUp = function(event) {
+    MDEditor.textarea.onkeyup = function(event) {
         save();
     }
-    MDEditor.textarea.onKeyDown = function(event) {
+    MDEditor.textarea.onkeydown = function(event) {
         if (event.shiftKey && event.keyCode == 13) {
             var newCaretPosition;
             newCaretPosition = textarea.getCaretPosition() + 1;
@@ -37,18 +41,16 @@ window.onload = function() {
     }
 
     function save() {
+		if (sessionStorage.getItem("text") != undefined) { //it's not the help text
+	        localStorage.setItem("lastText", textarea.value);
+	        localStorage.setItem("lastCaret", textarea.getCaretPosition());
+	        localStorage.setItem("lastTitle", document.title);
+		}
         sessionStorage.setItem("text", textarea.value);
         sessionStorage.setItem("caret", textarea.getCaretPosition());
         sessionStorage.setItem("title", document.title);
     }
     MDEditor.run();
-
-    document.onkeydown = function(event) {
-        window.pressedKey = event.keyCode;
-    }
-    document.onkeyup = function(event) {
-        window.pressedKey = -1;
-    }
 
     window.scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     window.onresize = function() {
@@ -76,8 +78,9 @@ window.onload = function() {
             textarea.value = sessionStorage.getItem("text");
             textarea.setCaretPosition(sessionStorage.getItem("caret"));
             document.title = sessionStorage.getItem("title");
-            MDEditor.updatePreview();
+  		  	MDEditor.updatePreview();
         } else {
+			MDEditor.updatePreview();
             askDocumentName();
         }
         showToast("☻", 1000);
@@ -85,9 +88,6 @@ window.onload = function() {
 
     function askDocumentName() {
         var userInput = prompt("Name this Document", document.title);
-        if (userInput == null) {
-            userInput == "Untitled";
-        }
         document.title = userInput + localStorage.getItem("markdownExtension");
     }
 
@@ -266,9 +266,6 @@ window.onload = function() {
     key('⌘+b, ctrl+b', function() {
         MDEditor.wrapTextWithString("**");
     });
-    key('ctrl+y', function() {
-        MDEditor.wrapTextWithString("~");
-    });
     key('ctrl+i', function() {
         MDEditor.wrapTextWithString("*");
     });
@@ -318,13 +315,18 @@ window.onload = function() {
         document.body.scrollTop = 0;
         textarea.scrollTop = 0;
     });
+    key('ctrl+alt+r', function() {
+        textarea.value = localStorage.getItem("lastText");
+		textarea.setCaretPosition(localStorage.getItem("lastCaret"));
+		document.title = localStorage.getItem("lastTitle")
+    });
     key('ctrl+shift+z', function() {
         MDEditor.updatePreview();
         var words = preview.outerText.split(/[\s\.\?]+/).length - 1;
         if (preview.outerText.length !== 0) {
-            showToast(words + " W", 1500);
+            showToast(words + " W", 1000);
         } else {
-            showToast("No Words", 1500);
+            showToast("No Words", 1000);
         }
         if (MDEditor.isLivePreview = 0) {
             preview.innerHTML = "";
@@ -335,9 +337,9 @@ window.onload = function() {
         MDEditor.updatePreview();
         var characters = preview.outerText.length;
         if (preview.outerText.length !== 0) {
-            showToast(characters + " C", 1500);
+            showToast(characters + " C", 1000);
         } else {
-            showToast("No Characters", 1500);
+            showToast("No Characters", 1000);
         }
         if (MDEditor.isLivePreview = 0) {
             preview.innerHTML = "";
@@ -353,15 +355,15 @@ window.onload = function() {
         } else {
             time[1] = today.getMinutes();
         }
-        showToast(time[0] + ":" + time[1], 1500);
+        showToast(time[0] + ":" + time[1], 1000);
     });
     var openTime = new Date().getTime();
     key('ctrl+alt+x', function() {
         var timeSpend = Math.floor((new Date().getTime() - openTime) / 60000);
         if (timeSpend > 1) {
-            showToast(timeSpend + " minutes", 1500);
+            showToast(timeSpend + " minutes", 1000);
         } else {
-            showToast("Less than 1 minute", 1500);
+            showToast("Less than 1 minute", 1000);
         }
     });
     String.prototype.toCapitalize = function() {
@@ -369,15 +371,6 @@ window.onload = function() {
             return p1 + p2.toUpperCase();
         });
     };
-    key('shift+backspace', function() {
-        if (textarea.isOnFocus) {
-            var newCaretPosition = textarea.getCaretPosition() - 1;
-            textarea.value = textarea.value.substring(0, textarea.getCaretPosition() - 1) + textarea.value.substring(textarea.getCaretPosition(), textarea.value.length);
-            textarea.setCaretPosition(newCaretPosition);
-        } else {
-            textarea.focus();
-        }
-    });
     key('ctrl+shift+y', function() {
 
         localStorage.setItem("lastText", textarea.value);
@@ -403,17 +396,23 @@ window.onload = function() {
         textarea.value = textarea.value.substring(0, textarea.getCaretPosition()) + ". " + textarea.value.substring(textarea.getCaretPosition(), textarea.value.length);
         textarea.setCaretPosition(newCaretPosition);
     });
-    key(ctrlKey + '+shift+backspace', function() {
-        if (textarea.isOnFocus) {
-            if (textarea.value.length > 0) {
-                if (confirm("Are you shure you want to clear your document ?")) {
-                    textarea.value = "";
+    textarea.addEventListener("keydown", function(event) {
+        if (event.keyCode == 8) {
+            if (event.shiftKey && event.ctrlKey) {
+                event.preventDefault();
+                if (textarea.value.length > 0) {
+                    if (confirm("Are you shure you want to clear your document ?")) {
+                        textarea.value = "";
+                    }
                 }
+            } else if (event.shiftKey) {
+                event.preventDefault();
+                var newCaretPosition = textarea.getCaretPosition() - 2;
+                textarea.value = textarea.value.substring(0, textarea.getCaretPosition() - 2) + textarea.value.substring(textarea.getCaretPosition(), textarea.value.length);
+                textarea.setCaretPosition(newCaretPosition);
             }
-        } else {
-            textarea.focus();
         }
-    });
+    }, false);
     key('ctrl+;', function() {
         if (textarea.isOnFocus) {
             var newCaretPosition = textarea.getCaretPosition() + "...".length;
@@ -473,27 +472,23 @@ window.onload = function() {
     document.getElementById("help").onclick = function() {
         window.open("../pages/help.html");
     }
-
-
+	
     function showToast(message, timer) {
-        if (document.getElementById("toast") != null) {
-            try {
-                document.body.removeChild(document.getElementById("toast"));
-            } catch (e) {}
-        }
         var toast = document.createElement('div');
         toast.setAttribute('id', "toast");
         document.body.appendChild(toast);
         toast.innerHTML = "<h1>" + message + "</h1>";
-        toast.style['-webkit-transition-duration'] = timer / 1000 + "s";
-        setTimeout(function() {
-            toast.style.opacity = 0;
-            setTimeout(function() {
-                try {
-                    document.body.removeChild(toast);
-                } catch (e) {}
-            }, timer / 2);
-        }, timer / 2);
+		window.setTimeout(function() {
+			toast.style.opacity = 0;
+			window.setTimeout(function() {
+				document.body.removeChild(toast);
+				
+				//bug: when we show a toast the live preview stop working...
+				MDEditor.isLivePreview = 1;
+            	MDEditor.updatePreview();
+				resizePanels(localStorage.getItem("zen"));
+			}, 200);
+		}, timer);
     }
 
     textarea.focus();
